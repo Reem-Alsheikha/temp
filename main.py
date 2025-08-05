@@ -26,7 +26,7 @@ def restart_and_reconnect():
   machine.reset()
 
 
-DHT_PIN = 21 
+DHT_PIN = 4
 sensor = dht.DHT22(Pin(DHT_PIN))
 
 
@@ -35,15 +35,14 @@ try:
 except OSError as e:
   restart_and_reconnect()
 
-
 while True:
     try:
         client.check_msg()
         if (time.time() - last_message) > message_interval:
             sensor.measure()
-            temp = sensor.temperature()
+            temperature = sensor.temperature()
             payload = json.dumps({
-                "temperature": temp,
+                "temperature": temperature,
                 "timestamp": time.time()
             })
             client.publish(topic_pub, payload)
