@@ -19,7 +19,7 @@ mqtt_pass = 'REPLACE_WITH_YOUR_MQTT_PASSWORD'
 #mqtt_server = '192.168.1.144'
 client_id = ubinascii.hexlify(machine.unique_id())
 topic_sub = b'bis2025/notification'
-topic_pub = b'bis2025/fiw'
+topic_pub = b'bis2025/gruppe5/temperature'
 
 last_message = 0
 message_interval = 5
