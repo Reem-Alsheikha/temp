@@ -35,27 +35,20 @@ try:
 except OSError as e:
   restart_and_reconnect()
 
-#while True:
- #try:
-    #client.check_msg()
-   # if (time.time() - last_message) > message_interval:
-      #msg = b'Hello #%d' % counter
-      #client.publish(topic_pub, msg)
-      #last_message = time.time()
-      #counter += 1
-   
+
 while True:
-  try:
-    client.check_msg()
-    if (time.time() - last_message) > message_interval:
-      sensor.measure()
-      temp = sensor.temperature()
-      payload = ujson.dumps({
-        "temperature": temp,
-        "timestamp": time.time()
-      })
-      client.publish(topic_pub, payload)
-      print("Gesendet:", payload)
-      
-  except OSError as e:
-    restart_and_reconnect()
+    try:
+        client.check_msg()
+        if (time.time() - last_message) > message_interval:
+            sensor.measure()
+            temp = sensor.temperature()
+            payload = json.dumps({
+                "temperature": temp,
+                "timestamp": time.time()
+            })
+            client.publish(topic_pub, payload)
+            print("Gesendet:", payload)
+            last_message = time.time()
+            counter += 1
+    except OSError as e:
+        restart_and_reconnect()
