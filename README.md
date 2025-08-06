@@ -25,9 +25,9 @@ Das Projekt ist Teil des Hackathons „Building IoT Solutions with OSS" an der H
 
 ### 1. ESP32 starten
 - MicroPython für ESP32   
-- MicroPython-Skript auf dem ESP32 ausführen
-- `boot.py`: stellt WLAN und MQTT verbindung her 
-- `main.py` : Misst Temperatur und sendet Daten per MQTT
+- MicroPython-Skript auf dem ESP32 ausführen :
+  - `boot.py`: stellt WLAN und MQTT verbindung her 
+  - `main.py` : Misst Temperatur und sendet Daten per MQTT
 - MQTT-Topic: `bis2025/gruppe5/temperature`
 
 ### 2. Node-RED Flow importieren
