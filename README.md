@@ -33,8 +33,8 @@ Das Projekt ist Teil des Hackathons „Building IoT Solutions with OSS" an der H
 ### 2. Node-RED Flow importieren
 - Node-RED öffnen: [`http://bis.f4.htw-berlin.de:1880`]
 - Flow importieren oder erstellen:
-  - MQTT IN → JSON → InfluxDB OUT
-                   → Debug
+  - MQTT IN → function : → InfluxDB OUT → Debug
+                   
 - MQTT Topic abonnieren: `bis2025/gruppe5/temperature`
 
 ### 3. InfluxDB
