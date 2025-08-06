@@ -22,6 +22,8 @@ mqtt_pass = 'REPLACE_WITH_YOUR_MQTT_PASSWORD'
 client_id = ubinascii.hexlify(machine.unique_id())
 topic_sub = b'bis2025/notification'
 topic_pub = b'bis2025/gruppe5/temperature' # Passendes Topic zum Senden
+topic_pub_soil = b'bis2025/gruppe5/soilmoisture'
+
 
 last_message = 0
 message_interval = 5 # Messintervall kleiner 5s

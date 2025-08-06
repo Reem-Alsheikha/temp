@@ -3,7 +3,13 @@ import json
 from simple import MQTTClient
 import machine
 import dht
-from machine import Pin
+from machine import Pin, ADC
+
+client_id = ubinascii.hexlify(machine.unique_id())
+topic_sub = b'bis2025/notification'
+topic_pub = b'bis2025/gruppe5/temperature' # Passendes Topic zum Senden
+topic_pub_soil = b'bis2025/gruppe5/soilmoisture'
+
 
 # Empfang von MQTT-Nachrichten ermöglichen (Callback)
 def sub_cb(topic, msg):
@@ -30,6 +36,11 @@ def restart_and_reconnect():
 DHT_PIN = 4
 sensor = dht.DHT22(Pin(DHT_PIN))
 
+# Bodenfeuchtesensor an GPIO32
+SOIL_PIN = 32
+soil_sensor = ADC(Pin(SOIL_PIN))
+soil_sensor.atten(ADC.ATTN_11DB)
+
 # Verbindung zu MQTT aufbauen
 try:
   client = connect_and_subscribe()
@@ -50,7 +61,20 @@ while True:
             #Daten an MQTT-Topic senden
             client.publish(topic_pub, payload)
             #Debug Ausgabe
-            print("Gesendet:", payload)
+            print("Gesendet an temperature:", payload)
+            
+            soil_value = soil_sensor.read()
+            soil_payload = json.dumps({
+                "soil-moisture": soil_value,
+                "timestamp": time.time()
+                })
+            client.publish(topic_pub_soil, soil_payload)
+            #Debug Ausgabe
+            print("Gesendet an soilmoisture:", soil_payload)
+            
+            
+            
+            
             last_message = time.time()
             counter += 1
     except OSError as e:
