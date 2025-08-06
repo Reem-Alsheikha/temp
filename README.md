@@ -42,5 +42,8 @@ Das Projekt ist Teil des Hackathons „Building IoT Solutions with OSS" an der H
 - Daten kommen automatisch über Node-RED rein
   
 ### 4. Grafana Dashboard erstellen
+- Das Dashboard zeigt:
+      - Live-Anzeige der aktuellen Temperatur
+      - Zeitverlauf
 - Grafana öffnen: [`http://bis.f4.htw-berlin.de:3000`]
-- Neue Data Source: **Team5**
+-  Data Source: **Team5**
