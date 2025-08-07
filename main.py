@@ -6,7 +6,7 @@ import dht
 from machine import Pin, ADC
 
 
-# Empfang von MQTT-Nachrichten ermöglichen (Callback)
+# Empfang von MQTT-Nachrichten ermöglichen (Callback) 
 def sub_cb(topic, msg):
   print((topic, msg))
   if topic == b'notification' and msg == b'received':
