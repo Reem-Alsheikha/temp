@@ -17,7 +17,7 @@ Das Projekt ist Teil des Hackathons „Building IoT Solutions with OSS" an der H
 ## Verwendete Hardware Komponente
 - **ESP32** (Mikrokontroller, liest Daten)
 - **DHT22** (Temperatursensor)
-- **Raspberry pi** (Hostet MQTT Broker, Node-RED, InfluxDB, Grafana)
+- **Raspberry pi** (Node-RED)
   
 ---
 
