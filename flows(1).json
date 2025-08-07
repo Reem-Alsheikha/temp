@@ -1,0 +1,43 @@
+[
+    {
+        "id": "92ddd08e3fd979a3",
+        "type": "influxdb out",
+        "z": "568162997a4e4602",
+        "influxdb": "3540a691068deda0",
+        "name": "sensors",
+        "measurement": "temperature",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "htw",
+        "bucket": "team5",
+        "x": 1140,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "3540a691068deda0",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://bis.f4.htw-berlin.de:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "698b0e4d0ff51377",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]
