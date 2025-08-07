@@ -5,11 +5,6 @@ import machine
 import dht
 from machine import Pin, ADC
 
-client_id = ubinascii.hexlify(machine.unique_id())
-topic_sub = b'bis2025/notification'
-topic_pub = b'bis2025/gruppe5/temperature' # Passendes Topic zum Senden
-topic_pub_soil = b'bis2025/gruppe5/soilmoisture'
-
 
 # Empfang von MQTT-Nachrichten ermöglichen (Callback)
 def sub_cb(topic, msg):
@@ -41,40 +36,39 @@ SOIL_PIN = 32
 soil_sensor = ADC(Pin(SOIL_PIN))
 soil_sensor.atten(ADC.ATTN_11DB)
 
+# Temperatur messen und senden
+def send_temperature(client):
+    sensor.measure()
+    temperature = sensor.temperature()
+    payload = json.dumps({
+        "temperature": temperature,
+        "timestamp": time.time()
+    })
+    client.publish(topic_pub, payload)
+    print("Gesendet an temperature:", payload)
+# Bodenfeuchtigkeit messen und senden
+def send_soil_moisture(client):
+    soil_value = soil_sensor.read()
+    soil_payload = json.dumps({
+        "soil-moisture": soil_value,
+        "timestamp": time.time()
+    })
+    client.publish(topic_pub_soil, soil_payload)
+    print("Gesendet an soilmoisture:", soil_payload)
 # Verbindung zu MQTT aufbauen
 try:
-  client = connect_and_subscribe()
+    client = connect_and_subscribe()
 except OSError as e:
-  restart_and_reconnect()
-# Hauptschleife für Messung, Formatierung und senden
+    restart_and_reconnect()
+
+# Hauptschleife für Messung, Formatierung und Senden
 while True:
     try:
-        client.check_msg() # Auf eingehende MQTT-Nachrichten prüfen
+        client.check_msg()  # Auf eingehende MQTT-Nachrichten prüfen
         if (time.time() - last_message) > message_interval:
-            sensor.measure()
-            temperature = sensor.temperature()
-            # Daten in JSON-Format mit Zeitstampel umwandeln
-            payload = json.dumps({  
-                "temperature": temperature,
-                "timestamp": time.time()
-            })
-            #Daten an MQTT-Topic senden
-            client.publish(topic_pub, payload)
-            #Debug Ausgabe
-            print("Gesendet an temperature:", payload)
-            
-            soil_value = soil_sensor.read()
-            soil_payload = json.dumps({
-                "soil-moisture": soil_value,
-                "timestamp": time.time()
-                })
-            client.publish(topic_pub_soil, soil_payload)
-            #Debug Ausgabe
-            print("Gesendet an soilmoisture:", soil_payload)
-            
-            
-            
-            
+            # Aufgerufene Funktionen
+            send_temperature(client)
+            send_soil_moisture(client)
             last_message = time.time()
             counter += 1
     except OSError as e:
