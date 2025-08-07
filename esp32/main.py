@@ -48,9 +48,10 @@ def send_temperature(client):
     print("Gesendet an temperature:", payload)
 # Bodenfeuchtigkeit messen und senden
 def send_soil_moisture(client):
-    soil_value = soil_sensor.read()
+    soil_raw = soil_sensor.read()
+    soil_percent = round((1 - (soil_raw / 4095)) * 100, 1 )
     soil_payload = json.dumps({
-        "soil-moisture": soil_value,
+        "soil-moisture": soil_percent,
         "timestamp": time.time()
     })
     client.publish(topic_pub_soil, soil_payload)
