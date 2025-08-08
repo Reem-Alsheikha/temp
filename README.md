@@ -1,8 +1,17 @@
-# Temperaturüberwachung mit ESP32, DHT22 und MQTT
+# IoT-Projekt – Temperatur- und Bodenfeuchtemessung mit ESP32
+Im Rahmen des Hackathons **"Building IoT Solutions with OSS"** an der HTW Berlin haben wir eine IoT-Lösung mit dem ESP32-Mikrocontroller umgesetzt.
 
-## Projektbeschreibung
-In diesem Projekt messen wir die Raumtemperatur mit einem **DHT22-Sensor** auf einem **ESP32**-Mikrocontroller. Die Daten werden per **MQTT** an einen Broker gesendet, mit **Node-RED** verarbeitet, in **InfluxDB** gespeichert und schließlich in **Grafana** visualisiert.
-Das Projekt ist Teil des Hackathons „Building IoT Solutions with OSS" an der HTW Berlin.
+### Basisfunktion
+Im ersten Teil des Projekts wurde die **Raumtemperatur** mithilfe eines **DHT22-Sensors** gemessen. Der ESP32 erfasst die Temperaturdaten und sendet sie per **MQTT** an einen zentralen Broker.
+
+### Erweiterung: Bodenfeuchtesensor & Telegram-Alarm
+
+Im zweiten Teil haben wir die Lösung um einen **kapazitiven Bodenfeuchtesensor** erweitert. Der ESP32 misst die Bodenfeuchtigkeit regelmäßig und berechnet daraus einen **Prozentwert**, basierend auf empirisch bestimmten Minimal- und Maximalwerten.
+
+Sobald die Bodenfeuchtigkeit unter einen definierten Schwellwert fällt (z. B. 30 %), wird automatisch eine **Benachrichtigung über Telegram** ausgelöst. Die Logik zur Schwellenwertprüfung und Benachrichtigung wurde dabei vollständig in **Node-RED** umgesetzt. 
+
+
+Dadurch wird der Nutzer aktiv informiert, wenn die Pflanze gegossen werden muss
 ---
 ## Verwendete Software Komponente
 - **ESP32** (MicroPython)
