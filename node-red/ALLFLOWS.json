@@ -1,0 +1,325 @@
+[
+    {
+        "id": "568162997a4e4602",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "20130c41af5fdfaf",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4439175dab814ce4",
+        "type": "mqtt-broker",
+        "name": "HTW Broker",
+        "broker": "broker.f4.htw-berlin.de",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "3540a691068deda0",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://bis.f4.htw-berlin.de:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "9d99828c5a4d0142",
+        "type": "telegram bot",
+        "botname": "Gruppe5",
+        "usernames": "",
+        "chatids": "6126670133",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "pollinterval": 300,
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": 6667,
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbothost": "0.0.0.0",
+        "localbotport": 8443,
+        "publicbotport": 8443,
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "42bd8001d2d2144d",
+        "type": "mqtt in",
+        "z": "568162997a4e4602",
+        "name": "",
+        "topic": "bis2025/gruppe5/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4439175dab814ce4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "4eae31fcaa0193d0"
+            ]
+        ]
+    },
+    {
+        "id": "c686c18907cb985f",
+        "type": "debug",
+        "z": "568162997a4e4602",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "92ddd08e3fd979a3",
+        "type": "influxdb out",
+        "z": "568162997a4e4602",
+        "influxdb": "3540a691068deda0",
+        "name": "sensors",
+        "measurement": "temperature",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "htw",
+        "bucket": "team5",
+        "x": 1140,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "4eae31fcaa0193d0",
+        "type": "function",
+        "z": "568162997a4e4602",
+        "name": "function 1",
+        "func": "msg.payload = {\n    temperature: msg.payload.temperature\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 340,
+        "wires": [
+            [
+                "92ddd08e3fd979a3",
+                "c686c18907cb985f"
+            ]
+        ]
+    },
+    {
+        "id": "f31ddd4c2d6077dd",
+        "type": "mqtt in",
+        "z": "568162997a4e4602",
+        "name": "",
+        "topic": "bis2025/gruppe5/soilmoisture",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4439175dab814ce4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 600,
+        "wires": [
+            [
+                "a1fe5642ac47f294"
+            ]
+        ]
+    },
+    {
+        "id": "a1fe5642ac47f294",
+        "type": "json",
+        "z": "568162997a4e4602",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 690,
+        "y": 600,
+        "wires": [
+            [
+                "bd7f0155956c6e8f",
+                "58d83d48b287fff8"
+            ]
+        ]
+    },
+    {
+        "id": "b2c6b54496226667",
+        "type": "influxdb out",
+        "z": "568162997a4e4602",
+        "influxdb": "3540a691068deda0",
+        "name": "soil-moisture",
+        "measurement": "soilmoisture",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "htw",
+        "bucket": "team5",
+        "x": 1190,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "bd7f0155956c6e8f",
+        "type": "function",
+        "z": "568162997a4e4602",
+        "name": "function 2",
+        "func": "msg.payload = {\n    soilmoisture: msg.payload.soilmoisture\n\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 600,
+        "wires": [
+            [
+                "b2c6b54496226667"
+            ]
+        ]
+    },
+    {
+        "id": "58d83d48b287fff8",
+        "type": "debug",
+        "z": "568162997a4e4602",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "64de592f76f318b6",
+        "type": "mqtt in",
+        "z": "568162997a4e4602",
+        "name": "",
+        "topic": "bis2025/gruppe5/soilmoisture",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "4439175dab814ce4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 1140,
+        "wires": [
+            [
+                "86520eaca94012ae"
+            ]
+        ]
+    },
+    {
+        "id": "86520eaca94012ae",
+        "type": "function",
+        "z": "568162997a4e4602",
+        "name": "Feuchtigkeit prüfen",
+        "func": "let moisture = msg.payload[\"soil-moisture\"];\nif (moisture < 40) {\n    msg.payload.chatId = \"6126670133\",\n    msg.payload.type = \"message\",\n    msg.payload.content = \"Achtung: Bodenfeuchte ist unter 30%\";\nreturn msg;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 1140,
+        "wires": [
+            [
+                "53233e7556848df9"
+            ]
+        ]
+    },
+    {
+        "id": "53233e7556848df9",
+        "type": "telegram sender",
+        "z": "568162997a4e4602",
+        "name": "",
+        "bot": "9d99828c5a4d0142",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 990,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc3b9b7126ef2da0",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb": "0.7.0",
+            "node-red-contrib-telegrambot": "16.3.2"
+        }
+    }
+]
