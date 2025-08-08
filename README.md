@@ -2,7 +2,7 @@
 Im Rahmen des Hackathons **"Building IoT Solutions with OSS"** an der HTW Berlin haben wir eine IoT-Lösung mit dem ESP32-Mikrocontroller umgesetzt.
 
 ### Basisfunktion
-Im ersten Teil des Projekts wurde die **Raumtemperatur** mithilfe eines **DHT22-Sensors** gemessen. Der ESP32 erfasst die Temperaturdaten und sendet sie per **MQTT** an einen zentralen Broker.
+Im ersten Teil des Projekts wurde die **Raumtemperatur** mithilfe eines **DHT22-Sensors** gemessen. 
 
 ### Erweiterung: Bodenfeuchtesensor & Telegram-Alarm
 
