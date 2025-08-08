@@ -2,7 +2,7 @@
 Im Rahmen des Hackathons **"Building IoT Solutions with OSS"** an der HTW Berlin haben wir eine IoT-Lösung mit dem ESP32-Mikrocontroller umgesetzt.
 
 ### Basisfunktion
-Im ersten Teil des Projekts wurde die **Raumtemperatur** mithilfe eines **DHT22-Sensors** gemessen, welches am **ESP32** gebunden ist. Dieser **ESP32** ist über WLAN mit dem **MQTT-Broker** verbunden und sendet alle 5 Sekunden die Messwerte als MQTT-Nachrichten auf ein vordefiniertes Topic. Dieses Topic wird von **NodeRed** abonniert. Dort wird die Datenverarbeitung visuell programmiert. Diese DAten empfängt **InfluxDB** über HTTP Requests. Nachdem die InfluxDB die Daten speichert, fragt **Grafana** über HTTP Querys die Daten ab. Somit werden sie letzendlich in Grafana in Diagrammen visualisiert.
+Im ersten Teil des Projekts wurde die **Raumtemperatur** mithilfe eines **DHT22-Sensors** gemessen, welches am **ESP32** gebunden ist. Dieser **ESP32** ist über WLAN mit dem **MQTT-Broker** verbunden und sendet alle 5 Sekunden die Messwerte als MQTT-Nachrichten auf ein vordefiniertes Topic. Dieses Topic wird von **NodeRed** abonniert. Dort wird die Datenverarbeitung visuell programmiert. Diese DAten empfängt **InfluxDB** über HTTP Requests. Nachdem die InfluxDB die Daten speichert, fragt **Grafana** über HTTP Querys die Daten ab. Dort können sie letzendlich in Grafana z.B. als Diagramm visualisiert werden.
 
 ### Erweiterung: Bodenfeuchtesensor & Telegram-Alarm
 
